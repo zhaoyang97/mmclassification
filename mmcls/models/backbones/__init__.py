@@ -14,7 +14,14 @@ from .shufflenet_v2 import ShuffleNetV2
 from .vgg import VGG
 from .vision_transformer import VisionTransformer
 
+from .resnet_carafed import ResNet_carafed
+from .resnet_carafed_3_kernelexp import ResNet_carafed_3_kernelexp
+
+
 __all__ = [
+    'ResNet_carafed',
+    'ResNet_carafed_3_kernelexp',
+
     'LeNet5', 'AlexNet', 'VGG', 'RegNet', 'ResNet', 'ResNeXt', 'ResNetV1d',
     'ResNeSt', 'ResNet_CIFAR', 'SEResNet', 'SEResNeXt', 'ShuffleNetV1',
     'ShuffleNetV2', 'MobileNetV2', 'MobileNetv3', 'VisionTransformer'

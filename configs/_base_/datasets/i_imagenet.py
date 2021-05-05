@@ -1,9 +1,9 @@
 # dataset settings
-batch_size = 64
+batch_size = 32
 
 dataset_type = 'ImageNet'
 train_root = '../data/imagenet/ILSVRC2012/ILSVRC2012_img_train/'
-var_root = '../data/imagenet/ILSVRC2012/ILSVRC2012_img_train/'
+var_root = '../data/imagenet/ILSVRC2012/ILSVRC2012_img_val/'
 label_root = '../data/imagenet'
 
 img_norm_cfg = dict(
