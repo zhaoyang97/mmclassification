@@ -1,0 +1,5 @@
+cd userfolder/mmclassification
+source activate mmclassification
+nvidia-smi
+
+
