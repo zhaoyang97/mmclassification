@@ -3,3 +3,11 @@ source activate mmclassification
 nvidia-smi
 
 
+
+
+configs/carafe/imagenet_resnet50.py                     # rtx00
+
+===================== DONE ======================
+
+configs/carafe/imagenet_resnet50_carafed.py             # rtx00
+configs/carafe/imagenet_resnet50_carafed_3_kernelexp.py # rtx01

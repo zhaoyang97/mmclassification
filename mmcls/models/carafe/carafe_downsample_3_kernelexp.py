@@ -10,25 +10,7 @@ from .i_attention_layer import SpatialAttention
 from .i_attention_layer import ConvBNReLU
 from .i_attention_layer import SE
 from .i_attention_layer import PowerIndex
-# from .i_attention_layer import Power
-
-class Power(nn.Module):
-    def __init__(self, kernel_size=7):
-        super(Power, self).__init__()
-        assert kernel_size in (3,7), "kernel size must be 3 or 7"
-        padding = 3 if kernel_size == 7 else 1
-
-        self.conv = nn.Conv2d(2,1,kernel_size, padding=padding, bias=False)
-        # self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        avgout = torch.mean(x, dim=1, keepdim=True)
-        maxout, _ = torch.max(x, dim=1, keepdim=True)
-        x = torch.cat([avgout, maxout], dim=1)
-        x = self.conv(x)
-        # x = self.sigmoid(x)
-        x = F.relu(x)
-        return x
+from .i_attention_layer import Power
 
 
 class CARAFE_Downsample_3_kernelexp(nn.Module):
@@ -98,12 +80,12 @@ class CARAFE_Downsample_3_kernelexp(nn.Module):
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 xavier_init(m, distribution='uniform')
-        normal_init(self.content_encoder, std=0.001)
+        # normal_init(self.content_encoder, std=0.001)
         kaiming_init(self.channel_compressor)
-        ### -init
-        # kaiming_init(self.kernel_encoder)
-        normal_init(self.kernel_encoder, std=0.002)
-        ### init-
+        kaiming_init(self.kernel_encoder)
+        # normal_init(self.content_encoder, std=0.001)
+        kaiming_init(self.kernel_encoder)
+
 
     def kernel_normalizer(self, mask, compressed_x):
         # mask = F.pixel_shuffle(mask, self.scale_factor) # no needed for down_sample
@@ -111,11 +93,13 @@ class CARAFE_Downsample_3_kernelexp(nn.Module):
         ### -init
         compressed_x = self.kernel_encoder(compressed_x)
         i = self.PI(compressed_x)
-        # i = torch.clamp(i, 0.00001)
+        # i = torch.clamp(i, -5, 5)
+        i = torch.clamp(i, max=5)
         # mask = torch.clamp(mask, 0.00001)
-        # mask = mask * torch.exp(i)
+        # mask = torch.clamp(mask, 0.00001)
+        mask = mask * torch.exp(i)
         # mask = mask * i.exp()
-        mask = mask * i
+        # mask = mask * i
         ### init-
 
         n, mask_c, h, w = mask.size()
