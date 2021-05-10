@@ -9,5 +9,6 @@ model = dict(
         type='ResNet',
         # type='ResNet_carafed',
         # type='ResNet_carafed_3_kernelexp',
+        depth=101,
     )
 )
