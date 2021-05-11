@@ -93,13 +93,11 @@ class CARAFE_Downsample_3_kernelexp(nn.Module):
         ### -init
         compressed_x = self.kernel_encoder(compressed_x)
         i = self.PI(compressed_x)
-        # i = torch.clamp(i, -5, 5)
-        i = torch.clamp(i, max=5)
-        # mask = torch.clamp(mask, 0.00001)
-        # mask = torch.clamp(mask, 0.00001)
-        mask = mask * torch.exp(i)
+        i = torch.clamp(i, -10, 10)
+        # i = torch.clamp(i, max=5)
+        # mask = mask * torch.exp(i)
         # mask = mask * i.exp()
-        # mask = mask * i
+        mask = mask * i
         ### init-
 
         n, mask_c, h, w = mask.size()

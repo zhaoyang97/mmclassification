@@ -8,6 +8,8 @@ resnet101 bs=8*16  2d12h
 
 
 
+configs/carafe/imagenet_resnet50_carafed_3_kernelexp.py  # rtx00 --resume-from epoch07
+
 configs/carafe/imagenet_resnet101.py
 configs/carafe/imagenet_resnet101_carafed.py             # rtx03 --resume-from epoch56
 configs/carafe/imagenet_resnet101_carafed_3_kernelexp.py # rtx00 --resume-from epoch56
