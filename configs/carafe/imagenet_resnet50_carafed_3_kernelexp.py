@@ -5,6 +5,7 @@ _base_ = [
 
 model = dict(
     type='ImageClassifier',
+    pretrained='work_dirs/imagenet_resnet50_carafed_3_kernelexp/imagenet_resnet50_carafed_3_kernelexp_pretrained.pth',
     backbone=dict(
         # type='ResNet',
         # type='ResNet_carafed',
